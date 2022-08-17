@@ -153,6 +153,7 @@ export const StateContext = ({ children }) => {
         decQuantity,
         connectUser,
         user,
+        setUser,
         deconnectUser,
       }}
     >
