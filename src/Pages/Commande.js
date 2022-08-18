@@ -28,6 +28,7 @@ const Commande = () => {
         _key: uniqid(),
         _type: "cart",
       });
+      return products;
     });
     const doc = {
       _id: uniqid(),

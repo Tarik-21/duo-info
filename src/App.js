@@ -14,7 +14,10 @@ import Contact from "./Pages/Contact";
 import CartPage from "./Pages/CartPage";
 import Commande from "./Pages/Commande";
 import QuiSommeNous from "./Pages/QuiSommeNous";
-import MonCompte from "./Pages/MonCompte";
+import Dashboard from "./component/MonCompte/Dashboard";
+import Commandes from "./component/MonCompte/Commandes";
+import InfosPersonel from "./component/MonCompte/InfosPersonel";
+import ViewOrder from "./component/MonCompte/ViewOrder";
 
 function App() {
   return (
@@ -23,7 +26,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/compte" element={<Compte />} />
-        <Route path="/mon-compte" element={<MonCompte />} />
+        <Route path="/mon-compte" element={<Dashboard />} />
+        <Route path="/mon-compte/orders" element={<Commandes />} />
+        <Route path="/mon-compte/orders/:num" element={<ViewOrder />} />
+        <Route path="/mon-compte/edit-account" element={<InfosPersonel />} />
         <Route path="/produit/:slug" element={<ProductDetailsPage />} />
         <Route path="/produits/:slug" element={<Products />} />
         <Route path="contact" element={<Contact />} />
