@@ -16,6 +16,7 @@ export const StateContext = ({ children }) => {
         setUser(JSON.parse(localDataUser));
       }
     }
+    
 
     if (cartItems.length === 0) {
       const localDataCart = localStorage.getItem("cartItems");
@@ -49,6 +50,16 @@ export const StateContext = ({ children }) => {
     navigate("/");
   };
 
+
+
+  const viderCart = () => {
+    setCartItems([]);
+    setTotalPrice(0);
+    setTotalQuantities(0);
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("totalQuantities");
+    localStorage.removeItem("totalPrice");
+  };
   const onAdd = (product, quantity) => {
     setTotalPrice(
       (prevTotalPrice) => prevTotalPrice + product.price * quantity
@@ -155,6 +166,7 @@ export const StateContext = ({ children }) => {
         user,
         setUser,
         deconnectUser,
+        viderCart
       }}
     >
       {children}
