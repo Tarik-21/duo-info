@@ -16,7 +16,6 @@ export const StateContext = ({ children }) => {
         setUser(JSON.parse(localDataUser));
       }
     }
-    
 
     if (cartItems.length === 0) {
       const localDataCart = localStorage.getItem("cartItems");
@@ -38,7 +37,10 @@ export const StateContext = ({ children }) => {
     }
   }, [cartItems, totalQuantities, totalPrice, user]);
 
+
+
   let foundProduct;
+
 
   const connectUser = (user) => {
     setUser(user);
@@ -49,8 +51,6 @@ export const StateContext = ({ children }) => {
     localStorage.removeItem("user");
     navigate("/");
   };
-
-
 
   const viderCart = () => {
     setCartItems([]);
@@ -166,7 +166,7 @@ export const StateContext = ({ children }) => {
         user,
         setUser,
         deconnectUser,
-        viderCart
+        viderCart,
       }}
     >
       {children}

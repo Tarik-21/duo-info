@@ -8,7 +8,6 @@ import { client } from "../client";
 const Home = () => {
   const [bannerData, setBannerData] = useState([]);
   const [products, setProducts] = useState([]);
-  const [productsNouveau, setProductsNouveau] = useState([]);
 
   useEffect(() => {
     const querybanner = '*[_type == "banner"]';
@@ -20,10 +19,7 @@ const Home = () => {
     client.fetch(queryProducts).then((data) => {
       setProducts(data);
     });
-    const queryNouveau = '*[_type=="nouveaux"]{products[]->}';
-    client.fetch(queryNouveau).then((data) => {
-      setProductsNouveau(data);
-    });
+    
     
   }, []);
 

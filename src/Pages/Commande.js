@@ -1,10 +1,12 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 import { useStateContext } from "../Context/StateContext";
 import { villes } from "../utils/ville";
 import { client } from "../client";
 
 const Commande = () => {
+  const navigate = useNavigate();
   const { user, cartItems, totalPrice, viderCart } = useStateContext();
   const emailRef = useRef();
   const nomRef = useRef();
@@ -47,10 +49,33 @@ const Commande = () => {
       ville: villeRef.current.value,
       totalPrice: totalPrice + 45,
     };
-    console.log("document", doc);
+    let productCommande = [];
+    cartItems.map((product) => {
+      productCommande.push({
+        product: { ...product },
+        qte: product.quantity,
+        sousTotal: product.quantity * product.price,
+        _key: uniqid(),
+        _type: "cart",
+      });
+      return productCommande;
+    });
+
+    const timeElapsed = Date.now();
+    const today = new Date(timeElapsed);
+
     client.createIfNotExists(doc).then(() => {
       setValid(true);
       viderCart();
+      navigate(`/mon-compte/orders/${doc._id}`, {
+        state: {
+          commande: {
+            ...doc,
+            products: productCommande,
+            _createdAt: today.toISOString(),
+          },
+        },
+      });
     });
   };
   return (

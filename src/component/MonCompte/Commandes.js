@@ -11,7 +11,7 @@ const Commandes = () => {
   const [commandes, setCommandes] = useState([]);
   const [loading, setloading] = useState(true);
   useEffect(() => {
-    const queryCommandes = `*[_type=="commandes" && orderBy._ref == "${user._id}"] | order(_createdAt desc)`;
+    const queryCommandes = `*[_type=="commandes" && orderBy._ref == "${user._id}"]{adresse,email,nom,orderBy,prenom,products[]{product->,qte,sousTotal},statut,telephone,totalPrice,ville,_createdAt,_id} | order(_createdAt desc)`;
     client.fetch(queryCommandes).then((data) => {
       setCommandes(data);
       setloading(false);
@@ -66,7 +66,10 @@ const Commandes = () => {
                       {Intl.NumberFormat("de-DE").format(commande.totalPrice)}{" "}
                       Dhs
                     </td>
-                    <Link to={`/mon-compte/orders/${commande._id}`} state={{ commande: commande }} >
+                    <Link
+                      to={`/mon-compte/orders/${commande._id}`}
+                      state={{ commande: commande }}
+                    >
                       <td className="py-2 px-4 text-sm align-top leading-snug border border-gray-200 flex flex-row justify-center bg-slate-200 hover:cursor-pointer">
                         Voir <AiFillEye className="ml-2 text-xl" />
                       </td>
