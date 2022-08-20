@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Slider } from "@mui/material";
 
-
-const Filter = () => {
-  const minDistance = 10;
+const Filter = ({ valueFilter, setValueFilter, min, max, FilterHandler }) => {
+  const minDistance = 20;
 
   const handleChange1 = (event, newValue, activeThumb) => {
     if (!Array.isArray(newValue)) {
@@ -11,12 +10,17 @@ const Filter = () => {
     }
 
     if (activeThumb === 0) {
-      setValue1([Math.min(newValue[0], value1[1] - minDistance), value1[1]]);
+      setValueFilter([
+        Math.min(newValue[0], valueFilter[1] - minDistance),
+        valueFilter[1],
+      ]);
     } else {
-      setValue1([value1[0], Math.max(newValue[1], value1[0] + minDistance)]);
+      setValueFilter([
+        valueFilter[0],
+        Math.max(newValue[1], valueFilter[0] + minDistance),
+      ]);
     }
   };
-  const [value1, setValue1] = useState([20, 37]);
   return (
     <div className="w-1/5 mt-6 mr-10">
       <p className="text-xl w-full">Filter par prix</p>
@@ -27,21 +31,27 @@ const Filter = () => {
       <Slider
         getAriaLabel={() => "Minimum distance"}
         onChange={handleChange1}
-        value={value1}
+        value={valueFilter}
         valueLabelDisplay="auto"
+        max={max}
+        min={min}
         sx={{
-          marginTop : '10px',
-          color: 'warning.main',
+          marginTop: "10px",
+          color: "warning.main",
         }}
         disableSwap
-      />      
-      <span className="text-slate-500">Prix : 1.590DHS — 6.500Dhs</span>
-      <a
-          class="inline-block mt-3 mb-6 px-8 py-2 text-sm font-medium text-white bg-orange-500 border border-orange-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
-          href="/download"
-        >
-          Filtrer
-        </a>
+      />
+      <span className="text-slate-500">
+        Prix : {valueFilter[0]}DHS — {valueFilter[1]}Dhs
+      </span>
+      <button
+        onClick={() => {
+          FilterHandler(valueFilter);
+        }}
+        class="inline-block mt-3 mb-6 px-8 py-2 text-sm font-medium text-white bg-orange-500 border border-orange-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
+      >
+        Filtrer
+      </button>
     </div>
   );
 };

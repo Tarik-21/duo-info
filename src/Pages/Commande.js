@@ -1,4 +1,8 @@
 import React, { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "react-hot-toast";
+import CircularProgress from "@mui/material/CircularProgress";
+
 import { useNavigate } from "react-router-dom";
 import uniqid from "uniqid";
 import { useStateContext } from "../Context/StateContext";
@@ -14,10 +18,12 @@ const Commande = () => {
   const villeRef = useRef();
   const adresseRef = useRef();
   const telephoneRef = useRef();
+  const form = useRef();
 
-  const [valid, setValid] = useState(null);
+  const [loading, setloading] = useState(false);
 
   const formhandler = () => {
+    setloading(true);
     let products = [];
     cartItems.map((product) => {
       products.push({
@@ -65,17 +71,40 @@ const Commande = () => {
     const today = new Date(timeElapsed);
 
     client.createIfNotExists(doc).then(() => {
-      setValid(true);
-      viderCart();
-      navigate(`/mon-compte/orders/${doc._id}`, {
-        state: {
-          commande: {
-            ...doc,
-            products: productCommande,
-            _createdAt: today.toISOString(),
+      emailjs
+        .sendForm(
+          process.env.REACT_APP_SERVICE_ID,
+          process.env.REACT_APP_TEMPLATE2_ID,
+          form.current,
+          process.env.REACT_APP_PUBLIC_KEY_EMAILJS
+        )
+        .then(
+          () => {
+            viderCart();
+            toast.success("Votre commande est en cours de traitement");
+            navigate(`/mon-compte/orders/${doc._id}`, {
+              state: {
+                commande: {
+                  ...doc,
+                  products: productCommande,
+                  _createdAt: today.toISOString(),
+                },
+              },
+            });
           },
-        },
-      });
+          () => {
+            viderCart();
+            navigate(`/mon-compte/orders/${doc._id}`, {
+              state: {
+                commande: {
+                  ...doc,
+                  products: productCommande,
+                  _createdAt: today.toISOString(),
+                },
+              },
+            });
+          }
+        );
     });
   };
   return (
@@ -84,18 +113,13 @@ const Commande = () => {
         <div className="w-4/5 mx-auto mb-5">
           <div className="flex flex-row justify-between items-start my-5">
             <div className="w-2/3 px-5">
-              {valid !== null && (
-                <div className="text-white px-6 py-3 bg-green-600 font-bold">
-                  Votre commande est en cours de traitement
-                </div>
-              )}
               <p className="text-3xl w-full">Facturation & Expédition</p>
               <div className="flex flex-row mt-2">
                 <span class="inline w-24 h-1 bg-orange-500"></span>
                 <span class="inline-block w-full h-1 bg-slate-100"></span>
               </div>
 
-              <form>
+              <form ref={form}>
                 <div className="flex flex-row justify-between mt-3">
                   <div className="w-5/12">
                     <label
@@ -107,6 +131,7 @@ const Commande = () => {
                     <input
                       defaultValue={user.nom}
                       ref={nomRef}
+                      name="nom"
                       required
                       id="nom"
                       type="text"
@@ -125,6 +150,7 @@ const Commande = () => {
                       required
                       defaultValue={user.prenom}
                       ref={prenomRef}
+                      name="prenom"
                       type="text"
                       class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-orange-500 rounded-full dark:bg-gray-800 dark:text-gray-300 dark:border-orange-600 focus:border-blue-400 focus:ring-orange-600 focus:ring-opacity-40 focus:border-orange-600 focus:outline-none focus:ring"
                     />
@@ -264,7 +290,11 @@ const Commande = () => {
                   onClick={formhandler}
                   class="inline-block mt-6 mb-6 px-12 py-3 text-center text-base font-medium text-white bg-orange-500 border border-orange-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
                 >
-                  Commander
+                  {loading === true ? (
+                    <CircularProgress style={{ color: "white" }} />
+                  ) : (
+                    <p>Commander</p>
+                  )}
                 </button>
               </div>
             </div>
