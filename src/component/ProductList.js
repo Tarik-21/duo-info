@@ -2,14 +2,14 @@ import React, { useState, useEffect } from "react";
 import Product from "./Product";
 import Slider from "react-slick";
 
-const ProductList = ({ title, products, slidesToShow }) => {
+const ProductList = ({ title,category, products, slidesToShow }) => {
   const [productFilter, setProductFilter] = useState([]);
   useEffect(() => {
     if (title === "Nouveaux") {
       setProductFilter(products);
     } else {
       setProductFilter(
-        products.filter((product) => product.subCategory.nom === title)
+        products.filter((product) => product.subCategory.nom === category)
       );
     }
   }, [products]);

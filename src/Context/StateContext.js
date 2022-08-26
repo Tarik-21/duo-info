@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { client } from "../client";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-hot-toast";
 const Context = createContext();
@@ -9,7 +10,18 @@ export const StateContext = ({ children }) => {
   const [totalPrice, setTotalPrice] = useState(0);
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [user, setUser] = useState(null);
+  const [products, setProducts] = useState([]);
   useEffect(() => {
+    //getAllProdcucts
+    if (products.length === 0) {
+      const queryProducts =
+        '*[_type=="products"]{_id,title,price,slug,subDescription,description,images,reduction,category->,subCategory->,caracteristiques,stock,topvente}';
+      client.fetch(queryProducts).then((data) => {
+        setProducts(data);
+        console.log(data);
+      });
+    }
+
     if (user === null) {
       const localDataUser = localStorage.getItem("user");
       if (localDataUser !== null) {
@@ -37,10 +49,7 @@ export const StateContext = ({ children }) => {
     }
   }, [cartItems, totalQuantities, totalPrice, user]);
 
-
-
   let foundProduct;
-
 
   const connectUser = (user) => {
     setUser(user);
@@ -167,6 +176,8 @@ export const StateContext = ({ children }) => {
         setUser,
         deconnectUser,
         viderCart,
+        products,
+        setProducts,
       }}
     >
       {children}

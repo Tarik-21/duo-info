@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import ProductDetails from "../component/ProductDetailsPage/ProductDetails";
-import ProductList from "../component/ProductList";
-
 const ProductDetailsPage = () => {
   const [product, setProduct] = useState(null);
   const location = useLocation();
@@ -15,9 +13,8 @@ const ProductDetailsPage = () => {
     <>
       <div className="w-4/5 mx-auto">
         {product != null && <ProductDetails product={product} />}
-        {/*        <ProductList title="Produit similaires" slidesToShow={3} />
-         */}{" "}
       </div>
+      .
     </>
   );
 };

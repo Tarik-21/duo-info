@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useSearchParams, useLocation } from "react-router-dom";
+import { useStateContext } from "../Context/StateContext";
 
-import ProductList from "../component/ProductList";
 import Filter from "../component/ProductsPage/Filter";
-import { client } from "../client";
 
 import ProductsPagination from "../component/ProductsPage/ProductsPagination";
 
 const Products = () => {
-  const [products, setProducts] = useState([]);
+  const { products } = useStateContext();
+  const [searchParams] = useSearchParams();
   const [filterProducts, setFilterProducts] = useState([]);
   const [valueFilter, setValueFilter] = useState([]);
   const [max, setMax] = useState();
@@ -19,24 +19,42 @@ const Products = () => {
   const FilterHandler = (value) => {
     setFilterProducts(
       products.filter(
-        (product) => product.price >= value[0] && product.price <= value[1]
+        (product) =>
+          product.price >= value[0] &&
+          product.price <= value[1] &&
+          product.subCategory.slug.current ===
+            location.state.subCategory.slug.current
       )
     );
   };
 
   useEffect(() => {
-    const queryproducts = `*[_type == "products" && subCategory->nom == "${location.state.subCategory}"]`;
-    client.fetch(queryproducts).then((data) => {
-      setProducts(data);
-      setFilterProducts(data)
-      setMax(Math.max(...data.map((o) => o.price)));
-      setMin(Math.min(...data.map((o) => o.price)));
-      setValueFilter([
-        Math.min(...data.map((o) => o.price)),
-        Math.max(...data.map((o) => o.price)),
-      ]);
-    });
-    setSubCategory(location.state.subCategory);
+    const search = searchParams.get('search');
+    let filteredProducts;
+    if(search===null){
+      filteredProducts = products.filter(
+        (product) =>
+          product.subCategory.slug.current ===
+          location.state.subCategory.slug.current
+      );
+      setSubCategory(location.state.subCategory.nom);
+    }else{
+      filteredProducts = products.filter(
+        (product) =>
+          product.subCategory.nom.toLowerCase().includes(search) || product.title.toLowerCase().includes(search)
+      );
+      setSubCategory(search);
+
+    }
+
+    
+    setFilterProducts(filteredProducts);
+    setMax(Math.max(...filteredProducts.map((o) => o.price)));
+    setMin(Math.min(...filteredProducts.map((o) => o.price)));
+    setValueFilter([
+      Math.min(...filteredProducts.map((o) => o.price)),
+      Math.max(...filteredProducts.map((o) => o.price)),
+    ]);
   }, [location]);
   return (
     <>
@@ -51,7 +69,10 @@ const Products = () => {
             min={min}
             max={max}
           />
-          <ProductsPagination products={filterProducts} subCategory={subCategory} />
+          <ProductsPagination
+            products={filterProducts}
+            subCategory={subCategory}
+          />
         </div>
       </div>
     </>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useStateContext } from "../Context/StateContext";
 import FirstSlide from "../component/Home/FirstSlide";
 import Marque from "../component/Home/Marque";
 import ProductList from "../component/ProductList";
@@ -7,20 +8,12 @@ import { client } from "../client";
 
 const Home = () => {
   const [bannerData, setBannerData] = useState([]);
-  const [products, setProducts] = useState([]);
-
+  const { products } = useStateContext();
   useEffect(() => {
     const querybanner = '*[_type == "banner"]';
     client.fetch(querybanner).then((data) => {
       setBannerData(data);
     });
-    const queryProducts =
-      '*[_type=="products"]{_id,title,price,slug,subDescription,description,images,reduction,category->,subCategory->,caracteristiques,stock,topvente}';
-    client.fetch(queryProducts).then((data) => {
-      setProducts(data);
-    });
-    
-    
   }, []);
 
   return (
@@ -30,9 +23,24 @@ const Home = () => {
       </div>
       <div className="w-4/5 mx-auto">
         <Marque />
-        <ProductList title="Iphone" products={products} slidesToShow={3} />
-        <ProductList title="Ipad" products={products} slidesToShow={3} />
-        <ProductList title="Mac" products={products} slidesToShow={3} />
+        <ProductList
+          title="Iphone"
+          category="Iphone"
+          products={products}
+          slidesToShow={3}
+        />
+        <ProductList
+          title="Ipad"
+          category="Ipad"
+          products={products}
+          slidesToShow={3}
+        />
+        <ProductList
+          title="Mac"
+          category="Mac"
+          products={products}
+          slidesToShow={3}
+        />
       </div>
     </>
   );

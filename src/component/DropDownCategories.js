@@ -38,7 +38,7 @@ const DropDownCategories = ({ categories }) => {
           <span class="inline-block w-20 h-1 bg-orange-500 mb-2"></span>
           <ul className="ml-4  ">
             {categoryHovring.subCategories.map((subCategory, index) => (
-              <Link to={`/produits/${subCategory.slug.current}`} state={{subCategory : subCategory.nom}}>
+              <Link to={`/produits/${subCategory.slug.current}`} state={{subCategory : subCategory}}>
                 <li
                   className="ml-4 mb-2  hover:text-orange-500 cursor-pointer"
                   key={index}
