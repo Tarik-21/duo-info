@@ -16,38 +16,52 @@ const Products = () => {
   const [subCategory, setSubCategory] = useState();
   const location = useLocation();
 
+  const search = searchParams.get("search");
+
   const FilterHandler = (value) => {
-    setFilterProducts(
-      products.filter(
-        (product) =>
-          product.price >= value[0] &&
-          product.price <= value[1] &&
-          product.subCategory.slug.current ===
-            location.state.subCategory.slug.current
-      )
-    );
+    console.log(search)
+    if (search === null) {
+      setFilterProducts(
+        products.filter(
+          (product) =>
+            product.price >= value[0] &&
+            product.price <= value[1] &&
+            product.subCategory.slug.current ===
+              location.state.subCategory.slug.current
+        )
+      );
+    } else {
+      setFilterProducts(
+        products.filter(
+          (product) =>
+            (product.price >= value[0] &&
+              product.price <= value[1] && (
+              product.subCategory.nom.toLowerCase().includes(search) ||
+            product.title.toLowerCase().includes(search) )
+        )
+        )
+      );
+    }
   };
 
   useEffect(() => {
-    const search = searchParams.get('search');
     let filteredProducts;
-    if(search===null){
+    if (search === null) {
       filteredProducts = products.filter(
         (product) =>
           product.subCategory.slug.current ===
           location.state.subCategory.slug.current
       );
       setSubCategory(location.state.subCategory.nom);
-    }else{
+    } else {
       filteredProducts = products.filter(
         (product) =>
-          product.subCategory.nom.toLowerCase().includes(search) || product.title.toLowerCase().includes(search)
+          product.subCategory.nom.toLowerCase().includes(search) ||
+          product.title.toLowerCase().includes(search)
       );
       setSubCategory(search);
-
     }
 
-    
     setFilterProducts(filteredProducts);
     setMax(Math.max(...filteredProducts.map((o) => o.price)));
     setMin(Math.min(...filteredProducts.map((o) => o.price)));

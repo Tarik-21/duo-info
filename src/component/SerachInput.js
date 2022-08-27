@@ -14,6 +14,7 @@ const SerachInput = () => {
         search: searchRef.current.value,
       }).toString(),
     });
+    searchRef.current.value =""
   };
   return (
     <form className="w-1/2 pl-3 search-input" onSubmit={SearchHandler}>
