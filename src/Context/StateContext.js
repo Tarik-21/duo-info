@@ -11,15 +11,31 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
-  const [loading,setLoading] = useState(true);
+  const [bannerData, setBannerData] = useState([]);
+  const [marques, setMarques] = useState([]);
+  const [loadingBanner, setLoadingBanner] = useState(true);
+  const [loadingMarque, setLoadingMarque] = useState(true);
+  const [loadingProduct, setLoadingProduct] = useState(true);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
+    //get banner and marques
+    const querybanner = '*[_type == "banner"]';
+    client.fetch(querybanner).then((data) => {
+      setBannerData(data);
+      setLoadingBanner(false);
+    });
+    const querymarques = '*[_type == "marques"]';
+    client.fetch(querymarques).then((data) => {
+      setMarques(data);
+      setLoadingMarque(false);
+    });
     //getAllProdcucts
     if (products.length === 0) {
       const queryProducts =
         '*[_type=="products"]{_id,title,price,slug,subDescription,description,images,reduction,category->,subCategory->,caracteristiques,stock,topvente}';
       client.fetch(queryProducts).then((data) => {
         setProducts(data);
-        setLoading(false)
+        setLoadingProduct(false);
       });
     }
 
@@ -48,7 +64,25 @@ export const StateContext = ({ children }) => {
       localStorage.setItem("totalQuantities", totalQuantities);
       localStorage.setItem("totalPrice", totalPrice);
     }
-  }, [cartItems, totalQuantities, totalPrice, user]);
+
+    if (
+      loadingBanner === false &&
+      loadingMarque === false &&
+      loadingProduct === false
+    ) {
+      setLoading(false);
+    }
+    console.log(loadingBanner,loadingMarque,loadingProduct)
+
+  }, [
+    cartItems,
+    totalQuantities,
+    totalPrice,
+    user,
+    loadingBanner,
+    loadingMarque,
+    loadingProduct,
+  ]);
 
   let foundProduct;
 
@@ -179,6 +213,8 @@ export const StateContext = ({ children }) => {
         viderCart,
         products,
         setProducts,
+        bannerData,
+        marques,
         loading,
       }}
     >

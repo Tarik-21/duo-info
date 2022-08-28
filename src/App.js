@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { FadingDots } from "react-cssfx-loading";
+import { FadingBalls } from "react-cssfx-loading";
 import { useStateContext } from "./Context/StateContext";
 
 import "xtendui";
@@ -27,7 +27,7 @@ function App() {
     <>
       {loading === true ? (
         <div className="flex h-screen justify-center">
-          <FadingDots color="#F2881B" />
+          <FadingBalls color="#F2881B" />
         </div>
       ) : (
         <>

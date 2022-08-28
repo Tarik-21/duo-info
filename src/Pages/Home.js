@@ -8,20 +8,10 @@ import { client } from "../client";
 
 const Home = () => {
  
-  const [bannerData, setBannerData] = useState([]);
-  const [marques,setMarques] = useState([])
 
-
-  const { products } = useStateContext();
+  const { products, bannerData, marques } = useStateContext();
   useEffect(() => {
-    const querybanner = '*[_type == "banner"]';
-    client.fetch(querybanner).then((data) => {
-      setBannerData(data);
-    });
-    const querymarques = '*[_type == "marques"]';
-    client.fetch(querymarques).then((data) => {
-      setMarques(data);
-    });
+   
   }, []);
 
   return (
@@ -30,7 +20,7 @@ const Home = () => {
         <FirstSlide width="w-full" bannerData={bannerData} />
       </div>
       <div className="w-4/5 mx-auto">
-        <Marque data={marques}/>
+        <Marque data={marques} />
         <ProductList
           title="Iphone"
           category="Iphone"
