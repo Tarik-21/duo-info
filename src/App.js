@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { FadingDots } from "react-cssfx-loading";
+import { useStateContext } from "./Context/StateContext";
 
 import "xtendui";
 import "xtendui/src/toggle";
@@ -20,24 +22,36 @@ import InfosPersonel from "./component/MonCompte/InfosPersonel";
 import ViewOrder from "./component/MonCompte/ViewOrder";
 
 function App() {
+  const { loading } = useStateContext();
   return (
     <>
-      <NavBar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/compte" element={<Compte />} />
-        <Route path="/mon-compte" element={<Dashboard />} />
-        <Route path="/mon-compte/orders" element={<Commandes />} />
-        <Route path="/mon-compte/orders/:num" element={<ViewOrder />} />
-        <Route path="/mon-compte/edit-account" element={<InfosPersonel />} />
-        <Route path="/produit/:slug" element={<ProductDetailsPage />} />
-        <Route path="/produits/:slug" element={<Products />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="cart" element={<CartPage />} />
-        <Route path="commande" element={<Commande />} />
-        <Route path="qui-sommes-nous" element={<QuiSommeNous />} />
-      </Routes>
-      <Footer />
+      {loading === true ? (
+        <div className="flex h-screen justify-center">
+          <FadingDots color="#F2881B" />
+        </div>
+      ) : (
+        <>
+          <NavBar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/compte" element={<Compte />} />
+            <Route path="/mon-compte" element={<Dashboard />} />
+            <Route path="/mon-compte/orders" element={<Commandes />} />
+            <Route path="/mon-compte/orders/:num" element={<ViewOrder />} />
+            <Route
+              path="/mon-compte/edit-account"
+              element={<InfosPersonel />}
+            />
+            <Route path="/produit/:slug" element={<ProductDetailsPage />} />
+            <Route path="/produits/:slug" element={<Products />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="commande" element={<Commande />} />
+            <Route path="qui-sommes-nous" element={<QuiSommeNous />} />
+          </Routes>
+          <Footer />
+        </>
+      )}
     </>
   );
 }

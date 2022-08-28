@@ -11,6 +11,7 @@ export const StateContext = ({ children }) => {
   const [totalQuantities, setTotalQuantities] = useState(0);
   const [user, setUser] = useState(null);
   const [products, setProducts] = useState([]);
+  const [loading,setLoading] = useState(true);
   useEffect(() => {
     //getAllProdcucts
     if (products.length === 0) {
@@ -18,7 +19,7 @@ export const StateContext = ({ children }) => {
         '*[_type=="products"]{_id,title,price,slug,subDescription,description,images,reduction,category->,subCategory->,caracteristiques,stock,topvente}';
       client.fetch(queryProducts).then((data) => {
         setProducts(data);
-        console.log(data);
+        setLoading(false)
       });
     }
 
@@ -178,6 +179,7 @@ export const StateContext = ({ children }) => {
         viderCart,
         products,
         setProducts,
+        loading,
       }}
     >
       {children}
