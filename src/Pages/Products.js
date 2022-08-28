@@ -16,7 +16,7 @@ const Products = () => {
   const [subCategory, setSubCategory] = useState();
   const location = useLocation();
 
-  const search = searchParams.get("search").toLowerCase();
+  const search = searchParams.get("search");
 
   const FilterHandler = (value) => {
     console.log(search)
@@ -36,8 +36,8 @@ const Products = () => {
           (product) =>
             (product.price >= value[0] &&
               product.price <= value[1] && (
-              product.subCategory.nom.toLowerCase().includes(search) ||
-            product.title.toLowerCase().includes(search) )
+              product.subCategory.nom.toLowerCase().includes(search.toLowerCase()) ||
+            product.title.toLowerCase().includes(search.toLowerCase()) )
         )
         )
       );
@@ -56,8 +56,8 @@ const Products = () => {
     } else {
       filteredProducts = products.filter(
         (product) =>
-          product.subCategory.nom.toLowerCase().includes(search) ||
-          product.title.toLowerCase().includes(search)
+          product.subCategory.nom.toLowerCase().includes(search.toLowerCase()) ||
+          product.title.toLowerCase().includes(search.toLowerCase())
       );
       setSubCategory(search);
     }
