@@ -18,6 +18,7 @@ import Dashboard from "./component/MonCompte/Dashboard";
 import Commandes from "./component/MonCompte/Commandes";
 import InfosPersonel from "./component/MonCompte/InfosPersonel";
 import ViewOrder from "./component/MonCompte/ViewOrder";
+import Zakaria from "./Pages/Zakaria";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="cart" element={<CartPage />} />
         <Route path="commande" element={<Commande />} />
         <Route path="qui-sommes-nous" element={<QuiSommeNous />} />
+        <Route path="zakaria" element={<Zakaria />} />
       </Routes>
       <Footer />
     </>

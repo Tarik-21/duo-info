@@ -16,7 +16,7 @@ const Products = () => {
   const [subCategory, setSubCategory] = useState();
   const location = useLocation();
 
-  const search = searchParams.get("search");
+  const search = searchParams.get("search").toLowerCase();
 
   const FilterHandler = (value) => {
     console.log(search)
