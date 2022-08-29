@@ -17,6 +17,7 @@ const ProductDetails = ({product}) => {
   const [qty, setQty] = useState(1);
 
   const {onAdd} = useStateContext();
+  const nameUrl = window.location.href;
 
   const incQty = () => {
     setQty((prevQty) => prevQty + 1);
@@ -80,7 +81,7 @@ const ProductDetails = ({product}) => {
           </div>
           <div>
             <a
-            href="https://wa.me/212633977642?text=How%20are%20you%20?"
+            href= {`https://wa.me/212633977642?text=Bonjour%20monsieur,%20je%20veux%20cette%20produit%20:%20${nameUrl}`}
             target="_blank"
               class="cursor-pointer inline-block mt-6 mr-2 mb-6 px-12 py-3 text-sm font-medium text-white bg-green-500 border border-green-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
             >
