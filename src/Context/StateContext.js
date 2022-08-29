@@ -72,7 +72,6 @@ export const StateContext = ({ children }) => {
     ) {
       setLoading(false);
     }
-    console.log(loadingBanner,loadingMarque,loadingProduct)
 
   }, [
     cartItems,
