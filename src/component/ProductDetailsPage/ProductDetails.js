@@ -79,18 +79,18 @@ const ProductDetails = ({product}) => {
             <span className="mr-2 font-bold">{qty}</span>
             <FaMinusCircle className="text-orange-500 text-xl cursor-pointer" onClick={decQty} />
           </div>
-          <div>
+          <div className="mt-6">
             <a
-            href= {`https://wa.me/212633977642?text=Bonjour%20monsieur,%20je%20veux%20cette%20produit%20:%20${nameUrl}`}
+            href= {`https://wa.me/212633977642?text=Bonjour%20monsieur,%20je%20veux%20ce%20produit%20:%20${nameUrl}`}
             target="_blank"
-              class="cursor-pointer inline-block mt-6 mr-2 mb-6 px-12 py-3 text-sm font-medium text-white bg-green-500 border border-green-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
+              class="cursor-pointer inline-block  mr-2 mb-6 px-12 py-3 text-sm font-medium text-white bg-green-500 border border-green-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
             >
               <BsWhatsapp className="inline-block mb-1 mr-2  text-xl" />
               Whatsapp
 
             </a>
             <p
-              class="cursor-pointer inline-block mt-6 mb-6 mr-2 px-12 py-3 text-sm font-bold font-medium text-white bg-orange-500 border border-orange-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
+              class="cursor-pointer inline-block  mb-6 mr-2 px-12 py-3 text-sm font-bold font-medium text-white bg-orange-500 border border-orange-500 rounded-full active:text-white hover:bg-slate-900 hover:text-white hover:border-slate-900 focus:outline-none duration-150"
               onClick={()=>onAdd(product,qty)}
             >
               <BsCartPlusFill className="inline-block mb-1 mr-2  text-xl" />
