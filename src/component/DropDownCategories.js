@@ -58,7 +58,7 @@ const DropDownCategories = ({ categories }) => {
   );
   return (
     <div className="w-4/5 mx-auto ">
-      <Menu as="div" className="relative inline-block text-left z-50">
+      <Menu as="div" className="relative inline-block text-left z-20">
         <div>
           <Menu.Button className="inline-flex justify-start items-center w-full rounded-t-md border border-gray-300  pl-8 pr-28 py-2 bg-orange-500 text-base font-medium text-white">
             <AiOutlineMenu className="mr-2" />
