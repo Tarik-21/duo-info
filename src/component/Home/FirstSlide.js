@@ -30,9 +30,9 @@ const FirstSlide = ({ width, bannerData }) => {
 
                   <a
                     href={value.url}
-                    className="xt-button py-2.5 px-3.5 text-sm rounded-md font-medium leading-snug tracking-wider text-white bg-black transition hover:bg-white hover:text-orange-500 active:bg-orange-600 on:bg-orange-600"
+                    className="xt-button py-2.5 px-3.5 text-lg rounded-md font-medium leading-snug tracking-wider text-white bg-black transition hover:bg-white hover:text-orange-500 active:bg-orange-600 on:bg-orange-600"
                   >
-                    Visit Collections
+                    Découvrez
                   </a>
                 </div>
                 <div className="w-1/2 flex flex-row justify-end">
