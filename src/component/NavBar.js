@@ -21,7 +21,7 @@ const NavBar = () => {
     //get All categories
 
     const query =
-      '*[_type == "categories"]{_id,nom,image,subCategories[]->{nom,slug}}';
+      '*[_type == "categories"]| order(_createdAt){_id,nom,image,subCategories[]->{nom,slug}}';
     client.fetch(query).then((data) => {
       setCategories(data);
     });

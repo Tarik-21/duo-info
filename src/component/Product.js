@@ -27,7 +27,7 @@ const Product = ({ product }) => {
           Nouveau
         </strong>
 
-        <h5 class="mt-1 text-lg text-orange-500">{product.category.nom}</h5>
+        <h5 class="mt-1 text-lg text-orange-500">{product.subCategory.nom}</h5>
 
         <Link
           to={`/produit/${product.slug.current}`}

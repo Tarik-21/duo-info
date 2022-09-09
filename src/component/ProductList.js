@@ -14,6 +14,7 @@ const ProductList = ({ title,category, products, slidesToShow }) => {
     }
   }, [products]);
   const settings = {
+    className: "flex items-stretch",
     dots: true,
     infinite: true,
     speed: 500,

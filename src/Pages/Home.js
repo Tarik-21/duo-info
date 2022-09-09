@@ -32,23 +32,24 @@ const Home = () => {
       <div className="w-4/5 mx-auto">
         <Marque data={marques} />
         <ProductList
-          title="Iphone"
-          category="Iphone"
+          title="PC, Ordinateur bureau et portable"
+          category="PC, Ordinateur bureau et portable"
           products={products}
           slidesToShow={3}
         />
-        <ProductList
-          title="Ipad"
-          category="Ipad"
+         <ProductList
+          title="Imprimante et scanner"
+          category="Imprimante et scanner"
           products={products}
           slidesToShow={3}
         />
-        <ProductList
-          title="Mac"
-          category="Mac"
+         <ProductList
+          title="Téléphone et Tablettes"
+          category="Téléphone et Tablettes"
           products={products}
           slidesToShow={3}
         />
+       
       </div>
     </>
   );

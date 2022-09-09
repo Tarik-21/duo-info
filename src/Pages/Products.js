@@ -9,6 +9,7 @@ import ProductsPagination from "../component/ProductsPage/ProductsPagination";
 const Products = () => {
   const { products } = useStateContext();
   const [searchParams] = useSearchParams();
+  const [marqueParams] = useSearchParams();
   const [filterProducts, setFilterProducts] = useState([]);
   const [valueFilter, setValueFilter] = useState([]);
   const [max, setMax] = useState();
@@ -17,10 +18,10 @@ const Products = () => {
   const location = useLocation();
 
   const search = searchParams.get("search");
+  const marque = searchParams.get("marque");
 
   const FilterHandler = (value) => {
-    console.log(search)
-    if (search === null) {
+    if (search === null && marque === null) {
       setFilterProducts(
         products.filter(
           (product) =>
@@ -30,15 +31,25 @@ const Products = () => {
               location.state.subCategory.slug.current
         )
       );
-    } else {
+    } else if (search !== null && marque === null) {
       setFilterProducts(
         products.filter(
           (product) =>
-            (product.price >= value[0] &&
-              product.price <= value[1] && (
-              product.subCategory.nom.toLowerCase().includes(search.toLowerCase()) ||
-            product.title.toLowerCase().includes(search.toLowerCase()) )
+            product.price >= value[0] &&
+            product.price <= value[1] &&
+            (product.subCategory.nom
+              .toLowerCase()
+              .includes(search.toLowerCase()) ||
+              product.title.toLowerCase().includes(search.toLowerCase()))
         )
+      );
+    } else if (search === null && marque !== null) {
+      setFilterProducts(
+        products.filter(
+          (product) =>
+            product.price >= value[0] &&
+            product.price <= value[1] &&
+            product.marque.toLowerCase().includes(marque.toLowerCase())
         )
       );
     }
@@ -46,20 +57,28 @@ const Products = () => {
 
   useEffect(() => {
     let filteredProducts;
-    if (search === null) {
+
+    if (search === null && marque === null) {
       filteredProducts = products.filter(
         (product) =>
           product.subCategory.slug.current ===
           location.state.subCategory.slug.current
       );
       setSubCategory(location.state.subCategory.nom);
-    } else {
+    } else if (search !== null && marque === null) {
       filteredProducts = products.filter(
         (product) =>
-          product.subCategory.nom.toLowerCase().includes(search.toLowerCase()) ||
+          product.subCategory.nom
+            .toLowerCase()
+            .includes(search.toLowerCase()) ||
           product.title.toLowerCase().includes(search.toLowerCase())
       );
       setSubCategory(search);
+    } else if (search === null && marque !== null) {
+      filteredProducts = products.filter((product) =>
+        product.marque.toLowerCase().includes(marque.toLowerCase())
+      );
+      setSubCategory(marque);
     }
 
     setFilterProducts(filteredProducts);

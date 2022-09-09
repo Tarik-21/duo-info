@@ -19,12 +19,12 @@ export const StateContext = ({ children }) => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     //get banner and marques
-    const querybanner = '*[_type == "banner"]';
+    const querybanner = '*[_type == "banner"]| order(_createdAt desc)';
     client.fetch(querybanner).then((data) => {
       setBannerData(data);
       setLoadingBanner(false);
     });
-    const querymarques = '*[_type == "marques"]';
+    const querymarques = '*[_type == "marques"]| order(_createdAt desc)';
     client.fetch(querymarques).then((data) => {
       setMarques(data);
       setLoadingMarque(false);
@@ -32,7 +32,7 @@ export const StateContext = ({ children }) => {
     //getAllProdcucts
     if (products.length === 0) {
       const queryProducts =
-        '*[_type=="products"]{_id,title,price,slug,subDescription,description,images,reduction,category->,subCategory->,caracteristiques,stock,topvente}';
+        '*[_type=="products"]| order(_createdAt desc){_id,title,price,slug,subDescription,description,images,reduction,marque,category->,subCategory->,caracteristiques,stock,topvente}';
       client.fetch(queryProducts).then((data) => {
         setProducts(data);
         setLoadingProduct(false);

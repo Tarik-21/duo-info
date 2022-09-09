@@ -11,7 +11,7 @@ const Marque = ({ data }) => {
     navigate({
       pathname: "produits/all",
       search: createSearchParams({
-        search: marque,
+        marque: marque,
       }).toString(),
     });
     window.scroll({
