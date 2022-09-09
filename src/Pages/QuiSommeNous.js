@@ -12,46 +12,9 @@ const QuiSommeNous = () => {
       </p>
       <span className="w-1/3 h-0.5 bg-orange-500"></span>
       <div className="text-slate-600 text-sm mt-5 mb-5">
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie depuis les années 1500,Le Lorem
-          Ipsum est simplement du faux texte employé dans la composition et la
-          mise en page avant impression. Le Lorem Ipsum est le faux texte
-          standard de l'imprimerie depuis les années 1500.
-        </p>
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie depuis les années 1500,Le Lorem
-          Ipsum est simplement du faux texte employé .
-        </p>
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie depuis les années 1500.
-        </p>
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie depuis les années 1500,Le Lorem
-          Ipsum est simplement du faux texte employé dans la composition et la
-          mise en page avant impression. Le Lorem Ipsum est le faux texte
-          standard de l'imprimerie depuis les années 1500.
-        </p>
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie.
-        </p>
-        <p>
-          Le Lorem Ipsum est simplement du faux texte employé dans la
-          composition et la mise en page avant impression. Le Lorem Ipsum est le
-          faux texte standard de l'imprimerie depuis les années 1500,Le Lorem
-          Ipsum est simplement du faux texte employé dans la composition et la
-          mise en page avant impression. Le Lorem Ipsum est le faux texte
-          
-        </p>
+        <video width="750" height="500" controls>
+          <source src="./videos/video1.mp4" type="video/mp4" />
+        </video>
       </div>
     </div>
   );
