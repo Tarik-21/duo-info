@@ -1,6 +1,5 @@
 import React from "react";
 import { BsFacebook, BsInstagram, BsYoutube } from "react-icons/bs";
-import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer class="text-center lg:text-left bg-black text-white">
@@ -9,13 +8,22 @@ const Footer = () => {
           <span>Réseaux sociaux</span>
         </div>
         <div class="flex justify-center">
-          <a href="https://www.facebook.com/duoinfomaroc" class="mr-6 text-gray-600">
+          <a
+            href="https://www.facebook.com/duoinfomaroc"
+            class="mr-6 text-gray-600"
+          >
             <BsFacebook color="orange" size={20} />
           </a>
-          <a href="https://www.instagram.com/hikvision_maroc/?hl=fr" class="mr-6 text-gray-600">
+          <a
+            href="https://www.instagram.com/hikvision_maroc/?hl=fr"
+            class="mr-6 text-gray-600"
+          >
             <BsInstagram color="orange" size={20} />
           </a>
-          <a href="https://www.youtube.com/channel/UCAB1Sl3BbMKopDs5z3ADQIw" class="mr-6 text-gray-600">
+          <a
+            href="https://www.youtube.com/channel/UCAB1Sl3BbMKopDs5z3ADQIw"
+            class="mr-6 text-gray-600"
+          >
             <BsYoutube color="orange" size="20px" />
           </a>
           <a href="#!" class="mr-6 text-gray-600"></a>
@@ -39,8 +47,8 @@ const Footer = () => {
               DUO INFO
             </h6>
             <p>
-              Here you can use rows and columns to organize your footer content.
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Duo info est une société de service de maintenance informatique et
+              télésurveillance basée à Fès depuis fin 2008.
             </p>
           </div>
           <div class="">
@@ -59,10 +67,9 @@ const Footer = () => {
             </p>
             <p class="mb-4">
               <a href="#!" class="text-white-600 hover:text-orange-500">
-                Caméra Ip et Analogique 
+                Caméra Ip et Analogique
               </a>
             </p>
-            
           </div>
           <div class="">
             <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
@@ -70,7 +77,7 @@ const Footer = () => {
             </h6>
             <p class="mb-4">
               <a href="#!" class="text-white-600 hover:text-orange-500">
-                Qui somme nous? 
+                Qui somme nous?
               </a>
             </p>
             <p class="mb-4">
@@ -83,7 +90,6 @@ const Footer = () => {
                 Compte
               </a>
             </p>
-           
           </div>
           <div class="">
             <h6 class="uppercase font-semibold mb-4 flex justify-center md:justify-start">
