@@ -25,17 +25,17 @@ const HikVision = () => {
       </div>
 
       <Slider {...settings}>
-        <div className="w-full h-96">
-            <img src='./images/hikvision/1.jpeg' alt="img" className="w-full object-cover"/>
+        <div className="w-full">
+            <img src='./images/hikvision/1.jpeg' alt="img" className="w-full object-cover h-96"/>
         </div>
-        <div className="w-full h-96">
-            <img src='./images/hikvision/2.png' alt="img" className="w-full object-cover"  />
+        <div className="w-full">
+            <img src='./images/hikvision/2.png' alt="img" className="w-full object-cover h-96"  />
         </div>
-        <div className="w-full h-96">
-            <img src='./images/hikvision/3.png' alt="img" className="w-full object-cover" />
+        <div className="w-full">
+            <img src='./images/hikvision/3.png' alt="img" className="w-full object-cover h-96" />
         </div>
-        <div className="w-full h-96">
-            <img src='./images/hikvision/4.png' alt="img" className="w-full object-cover" />
+        <div className="w-full">
+            <img src='./images/hikvision/4.png' alt="img" className="w-full object-cover h-96" />
         </div>
       </Slider>
     </div>
