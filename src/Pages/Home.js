@@ -5,6 +5,7 @@ import Marque from "../component/Home/Marque";
 import ProductList from "../component/ProductList";
 
 import HomeModel from "../component/HomeModel";
+import HikVision from "../component/Home/HikVision";
 
 const Home = () => {
   const [openModel, setOpenModel] = useState(true);
@@ -30,7 +31,8 @@ const Home = () => {
         <FirstSlide width="w-full" bannerData={bannerData} />
       </div>
       <div className="w-4/5 mx-auto">
-        <Marque data={marques} />
+        {/* <Marque data={marques} /> */}
+        <HikVision />
         <ProductList
           title="PC, Ordinateur bureau et portable"
           category="PC, Ordinateur bureau et portable"
