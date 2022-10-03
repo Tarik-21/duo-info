@@ -26,7 +26,7 @@ const HikVision = () => {
 
       <Slider {...settings}>
         <div className="w-full">
-            <img src='./images/hikvision/1.jpeg' alt="img" className="w-full lg:h-96 md:h-64"/>
+            <img src='./images/hikvision/1.png' alt="img" className="w-full lg:h-96 md:h-64"/>
         </div>
         <div className="w-full">
             <img src='./images/hikvision/2.png' alt="img" className="w-full lg:h-96 md:h-64"  />
